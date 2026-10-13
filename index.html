@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Alliance Contract Market</title>
+    <title>CTRLV Contract Market</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -264,34 +264,7 @@
             font-size: 1.1rem;
         }
 
-        /* ---- Slide Services cross-link strip ---- */
-        .slide-strip {
-            --strip-bg: #222; --strip-border: #444; --strip-accent: #007bff;
-            --strip-fg: #fff; --strip-sub: #aaa; --strip-label-fg: #888;
-            display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.75rem;
-            max-width: 1200px; margin: 0 auto 20px; padding: 0.25rem 0 0;
-        }
-        .slide-strip-label {
-            flex: 0 0 auto; align-self: center; writing-mode: vertical-rl;
-            transform: rotate(180deg); font-size: 0.62rem; font-weight: 700;
-            letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--strip-label-fg); padding: 0 2px; user-select: none;
-        }
-        .slide-strip-card {
-            flex: 1 1 0; min-width: 15rem; display: flex; flex-direction: column;
-            gap: 0.2rem; padding: 0.7rem 0.9rem; background: var(--strip-bg);
-            border: 1px solid var(--strip-border); border-radius: 10px;
-            text-decoration: none; transition: border-color 0.15s ease, transform 0.05s ease;
-        }
-        .slide-strip-card:hover { border-color: var(--strip-accent); transform: translateY(-1px); }
-        .slide-strip-card:active { transform: translateY(0); }
-        .slide-strip-card strong { color: var(--strip-fg); font-size: 0.95rem; line-height: 1.2; }
-        .slide-strip-card span { color: var(--strip-sub); font-size: 0.8rem; line-height: 1.35; }
-        @media (max-width: 640px) {
-            .slide-strip { flex-direction: column; margin-bottom: 1rem; }
-            .slide-strip-label { writing-mode: horizontal-tb; transform: none; text-align: center; padding: 0; }
-            .slide-strip-card { min-width: 0; }
-        }
+
     </style>
 </head>
 <body>
@@ -354,8 +327,8 @@
 
     <script>
         // --- CONFIGURATION ---
-        const clientId = 'ee7a29969a1547d28da9cb148b79c3e7';
-        const redirectUri = 'https://emabe390.github.io/SlideContracting/';
+        const clientId = 'cfa2156da20a418dad346c0f991f3183';
+        const redirectUri = 'https://kokosnos.github.io/CTRLVContracting/';
         const scope = 'esi-ui.open_window.v1';
 
         // --- URL PARSING ---
