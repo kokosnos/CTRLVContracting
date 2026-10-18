@@ -184,53 +184,58 @@
             transform: scale(1.03);
             filter: brightness(1.15);
         }
-        .card-image-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-        .tech-badge {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .badge-t2 {
-            background: linear-gradient(135deg, #b8860b, #ffd700);
-            color: #1a1a1a;
-            font-size: 0.75rem;
-            font-weight: 900;
-            padding: 2px 5px;
-            border-radius: 3px;
-            border: 1px solid #b8860b;
-            line-height: 1;
-        }
-        .badge-faction {
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 18px solid #00cc00;
-            filter: drop-shadow(0 0 2px rgba(0, 200, 0, 0.7));
-        }
-        .badge-pirate {
-            background: #cc0000;
-            color: #fff;
-            font-size: 0.65rem;
-            font-weight: bold;
-            padding: 2px 4px;
-            border-radius: 3px;
-            border: 1px solid #ff4444;
-        }
-        .badge-t3 {
-            background: linear-gradient(135deg, #800080, #da70d6);
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: 900;
-            padding: 2px 5px;
-            border-radius: 3px;
-            border: 1px solid #800080;
-        }
+.card-image-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;        /* lets the corner triangle follow the image's rounded corner */
+    border-radius: 6px;
+}
+.tech-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 2;
+    pointer-events: none;
+}
+.badge-t2 {
+    background: linear-gradient(135deg, #b8860b, #ffd700);
+    color: #1a1a1a;
+    font-size: 1.125rem;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid #b8860b;
+    line-height: 1;
+}
+.badge-t3 {
+    background: linear-gradient(135deg, #800080, #da70d6);
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid #800080;
+    line-height: 1;
+}
+.badge-pirate {
+    background: #cc0000;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 4px;
+    border: 1px solid #ff4444;
+    line-height: 1;
+}
+/* Faction: right triangle filling the top-left corner, like in-game */
+.badge-faction {
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    background: #0b6b22;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
         .card-name {
             font-weight: bold;
             font-size: 1.05rem;
@@ -523,27 +528,25 @@
             }
         }
 
-        function setFilter(weight) {
-            if (weight === 'all') {
-                activeFilters.clear();
-            } else {
-                const w = Number(weight);
-                if (activeFilters.has(w)) {
-                    activeFilters.delete(w);
-                } else {
-                    activeFilters.add(w);
-                }
-            }
-            document.querySelectorAll('.chip').forEach(chip => {
-                const w = chip.dataset.weight;
-                if (w === 'all') {
-                    chip.classList.toggle('active', activeFilters.size === 0);
-                } else {
-                    chip.classList.toggle('active', activeFilters.has(Number(w)));
-                }
-            });
-            applyFiltersAndRender();
+function setFilter(weight) {
+    if (weight === 'all') {
+        activeFilters.clear();
+    } else {
+        const w = Number(weight);
+        const wasActive = activeFilters.has(w);
+        activeFilters.clear();          // turn off everything else
+        if (!wasActive) activeFilters.add(w);
+    }
+    document.querySelectorAll('.chip').forEach(chip => {
+        const w = chip.dataset.weight;
+        if (w === 'all') {
+            chip.classList.toggle('active', activeFilters.size === 0);
+        } else {
+            chip.classList.toggle('active', activeFilters.has(Number(w)));
         }
+    });
+    applyFiltersAndRender();
+}
 
         function handleSearch(value) {
             searchQuery = value.trim().toLowerCase();
