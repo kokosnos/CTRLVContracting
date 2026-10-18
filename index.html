@@ -354,6 +354,7 @@
             5: 'Battleship', 6: 'Capital', 7: 'Industrial', 99: 'Unknown'
         };
 
+const SKULL_SVG = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" fill-rule="evenodd" d="M12 2C6.9 2 3.5 5.6 3.5 10.2c0 2.8 1.3 4.7 3 5.9V20c0 .6.4 1 1 1H9v-2h1.5v2h3v-2H15v2h1.5c.6 0 1-.4 1-1v-3.9c1.7-1.2 3-3.1 3-5.9C20.5 5.6 17.1 2 12 2zM8.2 12.8a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4zm7.6 0a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4zM12 13.2l1.6 2.6h-3.2z"/></svg>`;
         // --- AUTH UI ---
         function renderLoggedIn() {
             document.getElementById('auth-section').innerHTML = '';
@@ -636,8 +637,8 @@ if (searchQuery) {
                     } else if (row.tech_level === 't3') {
                         badge.textContent = 'III';
                     } else if (row.tech_level === 'pirate') {
-                        badge.textContent = 'P';
-                    }
+    badge.innerHTML = SKULL_SVG;
+}
                     // faction uses CSS triangle (no text content)
                     imgWrapper.appendChild(badge);
                 }
