@@ -38,6 +38,7 @@ TECH_GROUPS = {
     # T2
     324: "t2",   # Assault Frigate
     358: "t2",   # Heavy Assault Cruiser
+    540: "t2",   # Command Ship
     541: "t2",   # Interdictor
     830: "t2",   # Covert Ops
     831: "t2",   # Interceptor
@@ -100,6 +101,7 @@ SHIP_GROUPS = {
     25: 1,    # Frigate
     237: 1,   # Corvette
     324: 1,   # Assault Frigate
+    540: 4,   # Command Ship
     830: 1,   # Covert Ops
     831: 1,   # Interceptor
     834: 1,   # Stealth Bomber
@@ -166,16 +168,15 @@ async def esi_get_with_retry(client: httpx.AsyncClient, url: str, headers=None, 
 
 
 def derive_weight_from_group_name(name: str) -> int:
-    """Derive a class_weight from an EVE group name for unknown ship groups."""
     name_lower = name.lower()
     if any(k in name_lower for k in ("frigate", "corvette", "expedition")):
         return 1
-    if any(k in name_lower for k in ("destroyer", "dictor", "tactical destroyer", "command destroyer")):
+    if any(k in name_lower for k in ("destroyer", "dictor")):
         return 2
+    if "battlecruiser" in name_lower or "command ship" in name_lower:
+        return 4
     if "cruiser" in name_lower:
         return 3
-    if "battlecruiser" in name_lower:
-        return 4
     if any(k in name_lower for k in ("battleship", "marauder", "black ops")):
         return 5
     if any(k in name_lower for k in ("titan", "dreadnought", "carrier", "supercarrier", "force auxiliary", "capital")):
