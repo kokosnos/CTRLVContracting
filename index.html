@@ -564,9 +564,11 @@
         function applyFiltersAndRender() {
             let visible = contractData;
 
-            if (searchQuery) {
-                visible = visible.filter(c => c.title.toLowerCase().includes(searchQuery));
-            }
+if (searchQuery) {
+    visible = visible.filter(c =>
+        (c.title + ' ' + (c.ship_name || '')).toLowerCase().includes(searchQuery)
+    );
+}
 
             if (activeFilters.size > 0) {
                 visible = visible.filter(c => activeFilters.has(c.class_weight));
