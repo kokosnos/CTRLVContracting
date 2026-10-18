@@ -202,22 +202,25 @@
    inner 2/3 of the badge, so centering in it puts the icon at the
    triangle's visual center (1/3 of the way in from each edge). */
 .tech-badge {
+    --badge: 46px;
     position: absolute;
     top: 0;
     left: 0;
-    width: 40px;
-    height: 40px;
+    width: var(--badge);
+    height: var(--badge);
     z-index: 2;
     pointer-events: none;
     clip-path: polygon(0 0, 100% 0, 0 100%);
     box-sizing: border-box;
-    padding: 0 33.333% 33.333% 0;
+    /* shrink the centering area to the inner 2/3 so content lands at the
+       triangle's visual center (1/3 in from the top and left edges) */
+    padding: 0 calc(var(--badge) / 3) calc(var(--badge) / 3) 0;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     font-weight: 900;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     line-height: 1;
 }
 .tech-badge svg {
