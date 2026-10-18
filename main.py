@@ -760,9 +760,10 @@ async def scrape_contracts():
                 # Pre-resolve tech level for every unique known type_id
                 known_type_ids = [tid for tid in by_type.keys() if tid > 0]
                 type_tech = {}
+                type_names = {}
                 for tid in known_type_ids:
-                    tech = await resolve_type_tech_level(tid, client)
-                    type_tech[tid] = tech
+                    type_tech[tid] = await resolve_type_tech_level(tid, client)
+                    type_names[tid] = await get_type_name(tid, client) or ""
 
                 # Sort type_ids for deterministic iteration
                 for type_id in sorted(by_type.keys()):
@@ -780,6 +781,7 @@ async def scrape_contracts():
                             cheapest_ids = sorted(c["id"] for c in group if c["price"] == min_price)
                             export_data.append({
                                 "title": title,
+                                "ship_name": "",
                                 "type_id": 0,
                                 "class_weight": 99,
                                 "tech_level": "t1",
@@ -825,6 +827,7 @@ async def scrape_contracts():
 
                             export_data.append({
                                 "title": canonical,
+                                "ship_name": type_names.get(type_id, ""),
                                 "type_id": type_id,
                                 "class_weight": best_weight,
                                 "tech_level": tech_level,
