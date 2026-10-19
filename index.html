@@ -603,6 +603,7 @@ if (searchQuery) {
         }
 
         function renderCards() {
+            
             const grid = document.getElementById('contract-grid');
             grid.innerHTML = '';
             updateStats();
@@ -668,12 +669,12 @@ if (searchQuery) {
             shipEl.textContent = shipName;
             }
 
-                let name = null;
-                if (!sameAsShip) {
-                    name = document.createElement('div');
-                    name.className = 'card-name' + (shipName ? ' card-subtitle' : '');
-                    name.textContent = row.title;
-                }
+let name = null;
+if (!sameAsShip) {
+    name = document.createElement('div');
+    name.className = 'card-name';
+    name.textContent = row.title;
+}
                 
                 const details = document.createElement('div');
                 details.className = 'card-details';
@@ -682,11 +683,11 @@ if (searchQuery) {
                     <span class="card-count">${row.stock} ship${row.stock !== 1 ? 's' : ''}</span>
                 `;
                 
-                card.appendChild(imgWrapper);
-                if (shipEl) card.appendChild(shipEl);
-                if (name) card.appendChild(name);
-                card.appendChild(details);
-                grid.appendChild(card);
+if (shipEl) card.appendChild(shipEl);
+card.appendChild(imgWrapper);
+if (name) card.appendChild(name);
+card.appendChild(details);
+grid.appendChild(card);
             });
         }
 
